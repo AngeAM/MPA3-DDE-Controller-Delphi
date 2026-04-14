@@ -1,0 +1,146 @@
+unit DDEControlMPA3;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DdeMan, ComCtrls, MPA3DDEController;
+
+type
+  TForm1 = class(TForm)
+    DdeClientConv1: TDdeClientConv;
+    Start: TButton;
+    OpenLink: TButton;
+    CloseLink: TButton;
+    Stop: TButton;
+    GetData: TButton;
+    Continue: TButton;
+    Communication: TGroupBox;
+    Controls: TGroupBox;
+    ClearSpectra: TButton;
+    RequestData: TGroupBox;
+    Beep: TButton;
+    RichEdit1: TRichEdit;
+    GetRange: TButton;
+    SaveLoad: TGroupBox;
+    SetMPA: TButton;
+    EditPath: TEdit;
+    SaveDialog1: TSaveDialog;
+    Browse: TButton;
+    LoadMPA: TButton;
+    SaveMPA: TButton;
+    procedure StartClick(Sender: TObject);
+    procedure OpenLinkClick(Sender: TObject);
+    procedure CloseLinkClick(Sender: TObject);
+    procedure StopClick(Sender: TObject);
+    procedure ContinueClick(Sender: TObject);
+    procedure ClearSpectraClick(Sender: TObject);
+    procedure BeepClick(Sender: TObject);
+    procedure GetDataClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure GetRangeClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure SetMPAClick(Sender: TObject);
+    procedure LoadMPAClick(Sender: TObject);
+    procedure SaveMPAClick(Sender: TObject);
+    procedure BrowseClick(Sender: TObject);
+
+  private
+    { Private declarations }
+    FMPA3Controller: TMPA3DDEController;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  isopened: boolean;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+FMPA3Controller := TMPA3DDEController.Create;
+end;
+
+procedure TForm1.OpenLinkClick(Sender: TObject);
+begin
+  FMPA3Controller.openlink;
+end;
+
+procedure TForm1.CloseLinkClick(Sender: TObject);
+begin
+  DdeClientConv1.CloseLink;
+end;
+
+procedure TForm1.StartClick(Sender: TObject);
+begin
+  FMPA3Controller.start;
+end;
+
+procedure TForm1.StopClick(Sender: TObject);
+begin
+  FMPA3Controller.Stop;
+end;
+
+procedure TForm1.ContinueClick(Sender: TObject);
+begin
+    FMPA3Controller.Continue;
+end;
+
+procedure TForm1.ClearSpectraClick(Sender: TObject);
+begin
+    FMPA3Controller.ClearSpectra;
+end;
+
+procedure TForm1.BeepClick(Sender: TObject);
+begin
+    FMPA3Controller.Beep;
+end;
+
+procedure TForm1.GetDataClick(Sender: TObject);
+begin
+  RichEdit1.Text:= FMPA3Controller.Data;
+end;
+
+procedure TForm1.GetRangeClick(Sender: TObject);
+begin
+  RichEdit1.Text:= FMPA3Controller.Range;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+var data: string;
+begin
+  data := DdeClientConv1.RequestData('MPA?');
+  if data = ''
+  then showmessage('Command failed')
+  else
+  RichEdit1.Text:= data;
+end;
+
+
+procedure TForm1.SetMPAClick(Sender: TObject);
+begin
+  FMPA3Controller.SetMpa(EditPath.Text);
+end;
+
+procedure TForm1.LoadMPAClick(Sender: TObject);
+begin
+  FMPA3Controller.LoadMPA;
+end;
+
+procedure TForm1.SaveMPAClick(Sender: TObject);
+begin
+  FMPA3Controller.SaveMPA;
+end;
+
+procedure TForm1.BrowseClick(Sender: TObject);
+begin
+  SaveDialog1.Execute;
+  EditPath.Text:= SaveDialog1.Filename;
+end;
+
+end.

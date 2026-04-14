@@ -1,0 +1,193 @@
+object Form1: TForm1
+  Left = 3321
+  Top = 230
+  Width = 347
+  Height = 416
+  Caption = 'Form1'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Communication: TGroupBox
+    Left = 8
+    Top = 24
+    Width = 97
+    Height = 73
+    Caption = 'Communication'
+    TabOrder = 0
+    object CloseLink: TButton
+      Left = 8
+      Top = 40
+      Width = 75
+      Height = 25
+      Caption = 'Close Link'
+      TabOrder = 0
+      OnClick = CloseLinkClick
+    end
+    object OpenLink: TButton
+      Left = 8
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'Open Link'
+      TabOrder = 1
+      OnClick = OpenLinkClick
+    end
+  end
+  object Controls: TGroupBox
+    Left = 8
+    Top = 96
+    Width = 97
+    Height = 169
+    Caption = 'Controls'
+    TabOrder = 1
+    object Start: TButton
+      Left = 8
+      Top = 24
+      Width = 75
+      Height = 25
+      Caption = 'Start'
+      TabOrder = 0
+      OnClick = StartClick
+    end
+    object Stop: TButton
+      Left = 8
+      Top = 52
+      Width = 75
+      Height = 25
+      Caption = 'Stop'
+      TabOrder = 1
+      OnClick = StopClick
+    end
+    object Continue: TButton
+      Left = 8
+      Top = 80
+      Width = 75
+      Height = 25
+      Caption = 'Continue'
+      TabOrder = 2
+      OnClick = ContinueClick
+    end
+    object ClearSpectra: TButton
+      Left = 8
+      Top = 108
+      Width = 75
+      Height = 25
+      Caption = 'Clear Spectra'
+      TabOrder = 3
+      OnClick = ClearSpectraClick
+    end
+    object Beep: TButton
+      Left = 8
+      Top = 136
+      Width = 75
+      Height = 25
+      Caption = 'Beep'
+      TabOrder = 4
+      OnClick = BeepClick
+    end
+  end
+  object RequestData: TGroupBox
+    Left = 112
+    Top = 24
+    Width = 177
+    Height = 241
+    Caption = 'Request Data'
+    TabOrder = 2
+    object GetData: TButton
+      Left = 6
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'GetData'
+      TabOrder = 0
+      OnClick = GetDataClick
+    end
+    object RichEdit1: TRichEdit
+      Left = 8
+      Top = 48
+      Width = 153
+      Height = 185
+      Enabled = False
+      ScrollBars = ssVertical
+      TabOrder = 1
+    end
+    object GetRange: TButton
+      Left = 88
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'Get Range'
+      TabOrder = 2
+      OnClick = GetRangeClick
+    end
+  end
+  object SaveLoad: TGroupBox
+    Left = 8
+    Top = 272
+    Width = 281
+    Height = 97
+    Caption = 'Save and Load'
+    TabOrder = 3
+    object SetMPA: TButton
+      Left = 6
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'Set MPA'
+      TabOrder = 0
+      OnClick = SetMPAClick
+    end
+    object EditPath: TEdit
+      Left = 8
+      Top = 56
+      Width = 233
+      Height = 21
+      TabOrder = 1
+      Text = 
+        'C:\Users\ange\OneDrive - UAM\CMAM\External Micro Beam\Code delph' +
+        'i\Ange New Programs\DDEControlMPA3\test.mpa'
+    end
+    object Browse: TButton
+      Left = 248
+      Top = 56
+      Width = 25
+      Height = 21
+      Caption = '...'
+      TabOrder = 2
+      OnClick = BrowseClick
+    end
+    object LoadMPA: TButton
+      Left = 91
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'Load MPA'
+      TabOrder = 3
+      OnClick = LoadMPAClick
+    end
+    object SaveMPA: TButton
+      Left = 176
+      Top = 16
+      Width = 75
+      Height = 25
+      Caption = 'Save MPA'
+      TabOrder = 4
+      OnClick = SaveMPAClick
+    end
+  end
+  object DdeClientConv1: TDdeClientConv
+    Left = 296
+    Top = 32
+  end
+  object SaveDialog1: TSaveDialog
+    Left = 296
+    Top = 72
+  end
+end

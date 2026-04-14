@@ -1,0 +1,97 @@
+unit MPA3DDEController;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, DdeMan, Dialogs;
+
+type
+  // Class that handles DDE connection with the MPA-3 Server & MPANT application
+  TMPA3DDEController = class
+  private
+    FDdeClientConv: TDdeClientConv;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure OpenLink;
+    procedure Start;
+    procedure Stop;
+    procedure Continue;
+    procedure ClearSpectra;
+    procedure Beep;
+    function Data: string;
+    function Range: string;
+  end;
+
+implementation
+
+constructor TMPA3DDEController.Create;
+begin
+  inherited;
+  FDdeClientConv := TDdeClientConv.Create(nil);
+end;
+
+destructor TMPA3DDEController.Destroy;
+begin
+  FDdeClientConv.CloseLink;
+  FDdeClientConv.Free;
+  inherited;
+end;
+
+procedure TMPA3DDEController.OpenLink;
+begin
+  FDdeClientConv.SetLink('MPA3', 'MPA3-');
+  FDdeClientConv.OpenLink;
+end;
+
+procedure TMPA3DDEController.Start;
+begin
+  if not FDdeClientConv.ExecuteMacro('start', False) then
+    ShowMessage('Command failed');
+end;
+
+procedure TMPA3DDEController.Stop;
+begin
+  if not FDdeClientConv.ExecuteMacro('halt', False) then
+    ShowMessage('Command failed');
+end;
+
+procedure TMPA3DDEController.Continue;
+begin
+  if not FDdeClientConv.ExecuteMacro('cont', False) then
+    ShowMessage('Command failed');
+end;
+
+procedure TMPA3DDEController.ClearSpectra;
+begin
+  if not FDdeClientConv.ExecuteMacro('erasempa', False) then
+    ShowMessage('Command failed');
+end;
+
+procedure TMPA3DDEController.Beep;
+begin
+  if not FDdeClientConv.ExecuteMacro('beep', False) then
+    ShowMessage('Command failed');
+end;
+
+function TMPA3DDEController.Data;
+var data: string;
+begin
+  data := FDdeClientConv.RequestData('data');
+  if data = ''
+  then showmessage('Command failed')
+  else
+  Result := data;
+end;
+
+function TMPA3DDEController.Range;
+var range: string;
+begin
+  range := FDdeClientConv.RequestData('range');
+  if range = ''
+  then showmessage('Command failed')
+  else
+  Result := range;
+end;
+
+end.
